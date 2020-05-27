@@ -1,11 +1,13 @@
 import React from 'react';
 
 import DateDiff from 'date-diff';
+import trimCharacters from 'trim-characters';
 
 import './styles.css';
 
 export default function JobItem({job}) {
   const daysAgo = (new DateDiff(new Date(), new Date(job.publishedAt))).days();
+  const description = trimCharacters(job.description, 150, false, ' ...');
 
   return (
     <li class="list-group-item">
@@ -19,7 +21,7 @@ export default function JobItem({job}) {
           </small>
         </div>
         <p class="mb-1">
-          {job.description}
+          {description}
         </p>
       </a>
     </li>
