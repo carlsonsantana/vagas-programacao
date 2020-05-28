@@ -1,5 +1,11 @@
 import React from 'react';
 
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+
 import JobList from '../JobList';
 
 export default function PageContent() {
@@ -42,10 +48,12 @@ export default function PageContent() {
   ];
 
   return (
-    <div>
-      <main>
-        <JobList jobs={jobs} />
-      </main>
-    </div>
+    <main>
+      <Router basename="/vagas-programacao/">
+        <Switch>
+          <Route exact path="/" render={() => <JobList jobs={jobs} />} />
+        </Switch>
+      </Router>
+    </main>
   );
 }
