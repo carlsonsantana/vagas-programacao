@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 
 import DateDiff from 'date-diff';
 
@@ -27,7 +28,7 @@ export default function JobItem({jobs}) {
         </small>
       </div>
       <section>
-        { job.description }
+        <ReactMarkdown source={job.description} />
       </section>
     </article>
   );

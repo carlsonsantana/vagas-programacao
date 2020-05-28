@@ -15,7 +15,8 @@ export default function PageContent() {
       id: 'c6ce7282fcf82f6d5b2b97e8377509bf',
       title: '[REMOTO] Especialista em React',
       description: (
-        `É importante questionar o quanto o início da atividade geral de
+        `# Título
+        É importante questionar o quanto o início da atividade geral de
         formação de atitudes facilita a criação das condições financeiras e
         administrativas exigidas. Caros amigos, a complexidade dos estudos
         efetuados cumpre um papel essencial na formulação dos procedimentos
@@ -34,7 +35,8 @@ export default function PageContent() {
       id: 'e4abb10a25bddde60d87cf22b89287e3',
       title: '[REMOTO] DevOps na Empresa tal',
       description: (
-        `Nunca é demais lembrar o peso e o significado destes problemas, uma vez
+        `# Título
+        Nunca é demais lembrar o peso e o significado destes problemas, uma vez
         que a consolidação das estruturas desafia a capacidade de equalização
         dos índices pretendidos. No mundo atual, a constante divulgação das
         informações faz parte de um processo de gerenciamento dos
