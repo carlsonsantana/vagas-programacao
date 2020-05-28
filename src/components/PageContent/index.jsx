@@ -5,65 +5,58 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import md5 from 'md5';
 
 import JobList from '../JobList';
 import JobDetail from '../JobDetail';
 
-export default function PageContent() {
-  const jobs = [
-    {
-      id: 'c6ce7282fcf82f6d5b2b97e8377509bf',
-      title: '[REMOTO] Especialista em React',
-      description: (
-        `# Título
-        É importante questionar o quanto o início da atividade geral de
-        formação de atitudes facilita a criação das condições financeiras e
-        administrativas exigidas. Caros amigos, a complexidade dos estudos
-        efetuados cumpre um papel essencial na formulação dos procedimentos
-        normalmente adotados. Assim mesmo, a contínua expansão de nossa
-        atividade exige a precisão e a definição do levantamento das variáveis
-        envolvidas. Por outro lado, a competitividade nas transações comerciais
-        auxilia a preparação e a composição do sistema de formação de quadros
-        que corresponde às necessidades. Do mesmo modo, o novo modelo estrutural
-        aqui preconizado estende o alcance e a importância do retorno esperado a
-        longo prazo.`
-      ),
-      url: 'https://github.com/carlsonsantana',
-      publishedAt: (new Date(Date.now() - 172800000)).toISOString()
-    },
-    {
-      id: 'e4abb10a25bddde60d87cf22b89287e3',
-      title: '[REMOTO] DevOps na Empresa tal',
-      description: (
-        `# Título
-        Nunca é demais lembrar o peso e o significado destes problemas, uma vez
-        que a consolidação das estruturas desafia a capacidade de equalização
-        dos índices pretendidos. No mundo atual, a constante divulgação das
-        informações faz parte de um processo de gerenciamento dos
-        relacionamentos verticais entre as hierarquias. As experiências
-        acumuladas demonstram que a determinação clara de objetivos talvez venha
-        a ressaltar a relatividade da gestão inovadora da qual fazemos parte.
-        Todas estas questões, devidamente ponderadas, levantam dúvidas sobre se
-        o comprometimento entre as equipes causa impacto indireto na reavaliação
-        de todos os recursos funcionais envolvidos.`
-      ),
-      url: 'https://github.com/carlsonsantana/criptoarbitragem',
-      publishedAt: (new Date(Date.now() - 1123200000)).toISOString()
-    }
-  ];
+const API_URL = 'https://carlsonsantana.github.io/fakeapi-jobs/data.json';
 
-  return (
-    <main>
-      <Router basename="/vagas-programacao/">
-        <Switch>
-          <Route exact path="/" render={() => <JobList jobs={jobs} />} />
-          <Route
-            exact
-            path="/job/:id"
-            children={<JobDetail jobs={jobs} />}
-          />
-        </Switch>
-      </Router>
-    </main>
-  );
+class PageContent extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      jobs: []
+    };
+  }
+
+  componentDidMount() {
+    fetch(
+      API_URL,
+      {
+        cache: 'no-store',
+        method: 'GET'
+      }
+    ).then((response) => {
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+
+      return response.json();
+    }).then((jobs) => jobs.map((job) => {
+      job.id = md5(`${job.url}:${job.publishedAt}`);
+      return job;
+    })).then((jobs) => this.setState({jobs}));
+  }
+
+  render() {
+    const {jobs} = this.state;
+    return (
+      <main>
+        <Router basename="/vagas-programacao/">
+          <Switch>
+            <Route exact path="/" render={() => <JobList jobs={jobs} />} />
+            <Route
+              exact
+              path="/job/:id"
+              children={<JobDetail jobs={jobs} />}
+            />
+          </Switch>
+        </Router>
+      </main>
+    );
+  }
 }
+
+export default PageContent;
