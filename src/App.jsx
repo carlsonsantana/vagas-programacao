@@ -5,7 +5,7 @@ import PageContent from './components/PageContent';
 
 function App() {
   return (
-    <div class="container-fluid">
+    <div className="container-fluid">
       <PageHeader />
       <PageContent />
     </div>

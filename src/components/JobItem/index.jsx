@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Link } from "react-router-dom";
 import DateDiff from 'date-diff';
 import trimCharacters from 'trim-characters';
 
@@ -10,20 +11,20 @@ export default function JobItem({job}) {
   const description = trimCharacters(job.description, 150, false, ' ...');
 
   return (
-    <li class="list-group-item">
-      <a class="list-group-item-action" href="#">
-        <div class="d-flex w-100 justify-content-between">
-          <strong class="mb-1">{job.title}</strong>
+    <li className="list-group-item">
+      <Link className="list-group-item-action" to={`/job/${job.id}`}>
+        <div className="d-flex w-100 justify-content-between">
+          <strong className="mb-1">{job.title}</strong>
           <small>
             {daysAgo}
-            {daysAgo > 1 ? ' days ' : ' day '}
-            ago
+            {daysAgo > 1 ? ' dias ' : ' dia '}
+            atrás
           </small>
         </div>
-        <p class="mb-1">
+        <p className="mb-1">
           {description}
         </p>
-      </a>
+      </Link>
     </li>
   );
 }

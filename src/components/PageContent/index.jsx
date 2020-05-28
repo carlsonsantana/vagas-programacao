@@ -7,10 +7,12 @@ import {
 } from "react-router-dom";
 
 import JobList from '../JobList';
+import JobDetail from '../JobDetail';
 
 export default function PageContent() {
   const jobs = [
     {
+      id: 'c6ce7282fcf82f6d5b2b97e8377509bf',
       title: '[REMOTO] Especialista em React',
       description: (
         `É importante questionar o quanto o início da atividade geral de
@@ -29,6 +31,7 @@ export default function PageContent() {
       publishedAt: (new Date(Date.now() - 172800000)).toISOString()
     },
     {
+      id: 'e4abb10a25bddde60d87cf22b89287e3',
       title: '[REMOTO] DevOps na Empresa tal',
       description: (
         `Nunca é demais lembrar o peso e o significado destes problemas, uma vez
@@ -52,6 +55,11 @@ export default function PageContent() {
       <Router basename="/vagas-programacao/">
         <Switch>
           <Route exact path="/" render={() => <JobList jobs={jobs} />} />
+          <Route
+            exact
+            path="/job/:id"
+            children={<JobDetail jobs={jobs} />}
+          />
         </Switch>
       </Router>
     </main>

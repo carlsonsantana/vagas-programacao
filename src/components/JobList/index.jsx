@@ -4,9 +4,9 @@ import JobItem from '../JobItem';
 
 export default function JobList({jobs}) {
   return (
-    <ul class="list-group">
+    <ul className="list-group">
       {jobs.map(
-        (job) => <JobItem key={job.url} job={job} />
+        (job) => <JobItem key={job.id} job={job} />
       )}
     </ul>
   );
