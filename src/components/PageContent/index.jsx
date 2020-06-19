@@ -10,7 +10,7 @@ import md5 from 'md5';
 import JobList from '../JobList';
 import JobDetail from '../JobDetail';
 
-const API_URL = 'https://carlsonsantana.github.io/fakeapi-jobs/data.json';
+const API_URL = 'https://carlsonsantana.github.io/static-jobs-api/data.json';
 
 class PageContent extends React.Component {
   constructor() {
