@@ -2,11 +2,19 @@ import React from 'react';
 
 import { useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
+import ReactLoading from "react-loading";
 
-import DateDiff from 'date-diff';
+import TimeAgo from '../TimeAgo';
 
 export default function JobItem({jobs}) {
   const {id} = useParams();
+
+  if ((jobs === null) || (jobs.length === 0)) {
+    return (
+      <ReactLoading type="spokes" color="#000" />
+    );
+  }
+
   let job = null;
   for (let i = 0, length = jobs.length; i < length; i++) {
     if (jobs[i].id === id) {
@@ -15,17 +23,11 @@ export default function JobItem({jobs}) {
     }
   }
 
-  const daysAgo = (new DateDiff(new Date(), new Date(job.publishedAt))).days();
-
   return (
     <article>
       <div className="d-flex w-100 justify-content-between">
-        <h2 className="mb-1">{ job.title }</h2>
-        <small>
-          {daysAgo}
-          {daysAgo > 1 ? ' dias ' : ' dia '}
-          atrás
-        </small>
+        <h2 className="mb-1">{job.title}</h2>
+        <TimeAgo date={job.publishedAt} />
       </div>
       <section>
         <ReactMarkdown source={job.description} />

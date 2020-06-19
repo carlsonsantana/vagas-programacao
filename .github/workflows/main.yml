@@ -17,6 +17,8 @@ jobs:
       run: |
         npm install
         npm run build
+        touch build/.nojekyll
+        cp build/index.html build/404.html
 
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
