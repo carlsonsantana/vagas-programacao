@@ -13,7 +13,7 @@ export default function JobItem({job}) {
   );
 
   return (
-    <li className="list-group-item">
+    <li className="list-group-item job-item">
       <Link className="list-group-item-action" to={`/job/${job.id}`}>
         <div className="d-flex w-100 justify-content-between">
           <strong className="mb-1">{job.title}</strong>

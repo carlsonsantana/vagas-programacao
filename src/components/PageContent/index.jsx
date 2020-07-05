@@ -4,11 +4,11 @@ import {
   BrowserRouter as Router,
   Switch,
   Route
-} from "react-router-dom";
+} from 'react-router-dom';
 import md5 from 'md5';
 
 import JobList from '../JobList';
-import JobDetail from '../JobDetail';
+import JobDetails from '../JobDetails';
 
 const API_URL = 'https://carlsonsantana.github.io/static-jobs-api/data.json';
 
@@ -50,7 +50,7 @@ class PageContent extends React.Component {
             <Route
               exact
               path="/job/:id"
-              children={<JobDetail jobs={jobs} />}
+              children={<JobDetails jobs={jobs} />}
             />
           </Switch>
         </Router>
