@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import trimCharacters from 'trim-characters';
 import removeMarkdown from 'remove-markdown';
 
-import './styles.css';
+import './style.css';
 import TimeAgo from '../TimeAgo';
 
 export default function JobItem({job}) {
