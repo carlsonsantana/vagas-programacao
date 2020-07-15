@@ -5,6 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import ReactLoading from 'react-loading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import remarkBreaks from 'remark-breaks';
 
 import TimeAgo from '../TimeAgo';
 import './style.css';
@@ -56,7 +57,7 @@ export default function JobDetails({jobs}) {
           </ul>
         </section>
         <section>
-          <ReactMarkdown source={job.description} />
+          <ReactMarkdown source={job.description} plugins={[remarkBreaks]} />
         </section>
       </section>
     </article>
