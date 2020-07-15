@@ -32,6 +32,7 @@
     "react-scripts": "3.4.1",
     "remark-breaks": "^1.0.5",
     "remove-markdown": "^0.3.0",
+    "strip-html-comments": "^1.0.0",
     "trim-characters": "^1.4.0"
   },
   "scripts": {

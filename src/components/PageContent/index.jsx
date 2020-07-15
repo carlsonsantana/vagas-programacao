@@ -6,6 +6,7 @@ import {
   Route
 } from 'react-router-dom';
 import md5 from 'md5';
+import stripHtmlComments from 'strip-html-comments';
 
 import JobList from '../JobList';
 import JobDetails from '../JobDetails';
@@ -36,6 +37,9 @@ class PageContent extends React.Component {
       return response.json();
     }).then((jobs) => jobs.map((job) => {
       job.id = md5(`${job.url}:${job.publishedAt}`);
+      return job;
+    })).then((jobs) => jobs.map((job) => {
+      job.description = stripHtmlComments(job.description);
       return job;
     })).then((jobs) => this.setState({jobs}));
   }
