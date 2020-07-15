@@ -3,6 +3,7 @@ import React from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 
 import JobItem from '../JobItem';
+import SearchForm from '../SearchForm';
 
 class JobList extends React.Component {
   constructor() {
@@ -34,16 +35,19 @@ class JobList extends React.Component {
   render() {
     const {loadedJobs, hasMoreJobs} = this.state;
     return (
-      <InfiniteScroll
-        element="ul"
-        className="list-group"
-        loadMore={this.loadJobs.bind(this)}
-        hasMore={hasMoreJobs}
-      >
-        {loadedJobs.map(
-          (job) => <JobItem key={job.id} job={job} />
-        )}
-      </InfiniteScroll>
+      <div>
+        <SearchForm />
+        <InfiniteScroll
+          element="ul"
+          className="list-group"
+          loadMore={this.loadJobs.bind(this)}
+          hasMore={hasMoreJobs}
+        >
+          {loadedJobs.map(
+            (job) => <JobItem key={job.id} job={job} />
+          )}
+        </InfiniteScroll>
+      </div>
     );
   }
 }
