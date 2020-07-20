@@ -81,7 +81,7 @@ class PageContent extends React.Component {
             <Route
               exact
               path="/job/:id"
-              children={<JobDetails jobs={jobs} />}
+              render={() => <JobDetails jobs={jobs} />}
             />
           </Switch>
         </Router>
