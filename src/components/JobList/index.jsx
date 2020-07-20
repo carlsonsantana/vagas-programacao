@@ -36,7 +36,7 @@ class JobList extends React.Component {
     const {loadedJobs, hasMoreJobs} = this.state;
     return (
       <div>
-        <SearchForm />
+        <SearchForm filterHandler={this.props.filterHandler} />
         <InfiniteScroll
           element="ul"
           className="list-group"

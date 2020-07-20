@@ -11,14 +11,38 @@ class SearchForm extends React.Component {
 
     const thirtyDaysInMilliseconds = 2592000000;
     const today = new Date();
-    const thirtyDaysAgo = today.getTime() - thirtyDaysInMilliseconds;
+    const thirtyDaysAgo = new Date(today.getTime() - thirtyDaysInMilliseconds);
 
     this.state = {
-      jobTitle: '',
-      jobDescription: '',
-      jobStartDate: thirtyDaysAgo,
-      jobEndDate: today
+      title: '',
+      description: '',
+      startDate: thirtyDaysAgo,
+      endDate: today
     };
+  }
+
+  titleHandleChange(event) {
+    this.changeState({title: event.target.value});
+  }
+
+  descriptionHandleChange(event) {
+    this.changeState({description: event.target.value});
+  }
+
+  startDateHandleChange(startDate) {
+    this.changeState({startDate});
+  }
+
+  endDateHandleChange(endDate) {
+    this.changeState({endDate});
+  }
+
+  changeState(newState) {
+    this.setState(newState, this.filterJobs.bind(this));
+  }
+
+  filterJobs() {
+    this.props.filterHandler(this.state);
   }
 
   render() {
@@ -32,6 +56,7 @@ class SearchForm extends React.Component {
               type="text"
               className="form-control"
               id="job-title"
+              onChange={this.titleHandleChange.bind(this)}
             />
           </div>
           <div className="form-group">
@@ -40,6 +65,7 @@ class SearchForm extends React.Component {
               type="text"
               className="form-control"
               id="job-description"
+              onChange={this.descriptionHandleChange.bind(this)}
             />
           </div>
           <fieldset>
@@ -49,8 +75,8 @@ class SearchForm extends React.Component {
               <DatePicker
                 id="job-start-date"
                 className="form-control"
-                selected={this.state.jobStartDate}
-                onChange={(jobStartDate) => this.setState({jobStartDate})}
+                selected={this.state.startDate}
+                onChange={this.startDateHandleChange.bind(this)}
               />
             </div>
             <div className="form-group">
@@ -58,8 +84,8 @@ class SearchForm extends React.Component {
               <DatePicker
                 id="job-end-date"
                 className="form-control"
-                selected={this.state.jobEndDate}
-                onChange={(jobEndDate) => this.setState({jobEndDate})}
+                selected={this.state.endDate}
+                onChange={this.endDateHandleChange.bind(this)}
               />
             </div>
           </fieldset>
