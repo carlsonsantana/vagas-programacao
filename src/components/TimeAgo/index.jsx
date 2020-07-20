@@ -8,7 +8,7 @@ export default function TimeAgo({date}) {
   const hoursAgo = Math.round(diff.hours());
   const minutesAgo = Math.ceil(diff.minutes());
   const showDays = daysAgo >= 1;
-  const showHours = showDays && (hoursAgo >= 1);
+  const showHours = !showDays && (hoursAgo >= 1);
 
   return (
     <small>
