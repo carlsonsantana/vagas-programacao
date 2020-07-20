@@ -3,8 +3,6 @@ name: Deploy on GitHub Pages
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
 jobs:
   build-and-deploy:
@@ -23,6 +21,6 @@ jobs:
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
-        GITHUB_TOKEN: ${{ secrets.PAGES_TOKEN_VAGAS_PROGRAMACAO }}
+        ACCESS_TOKEN: ${{ secrets.PAGES_TOKEN_VAGAS_PROGRAMACAO }}
         BRANCH: gh-pages
         FOLDER: build
