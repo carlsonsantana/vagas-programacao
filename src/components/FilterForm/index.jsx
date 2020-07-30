@@ -5,7 +5,7 @@ import InputRange from '../InputRange';
 const DEFAULT_START_DAY_BEFORE = 0;
 const DEFAULT_END_DAY_BEFORE = 30;
 
-class SearchForm extends React.Component {
+class FilterForm extends React.Component {
   constructor() {
     super();
 
@@ -73,4 +73,4 @@ class SearchForm extends React.Component {
   }
 }
 
-export default SearchForm;
+export default FilterForm;

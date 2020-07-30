@@ -3,7 +3,7 @@ import React from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 
 import JobItem from '../JobItem';
-import SearchForm from '../SearchForm';
+import FilterForm from '../FilterForm';
 
 class JobList extends React.Component {
   constructor() {
@@ -36,7 +36,7 @@ class JobList extends React.Component {
     const {loadedJobs, hasMoreJobs} = this.state;
     return (
       <div>
-        <SearchForm filterHandler={this.props.filterHandler} />
+        <FilterForm filterHandler={this.props.filterHandler} />
         <InfiniteScroll
           element="ul"
           className="list-group"
