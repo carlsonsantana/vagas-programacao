@@ -1,23 +1,19 @@
 import React from 'react';
 
-import DatePicker from 'react-datepicker';
+import InputRange from '../InputRange';
 
-import 'react-datepicker/dist/react-datepicker.css';
-import './style.css';
+const DEFAULT_START_DAY_BEFORE = 0;
+const DEFAULT_END_DAY_BEFORE = 30;
 
 class SearchForm extends React.Component {
   constructor() {
     super();
 
-    const thirtyDaysInMilliseconds = 2592000000;
-    const today = new Date();
-    const thirtyDaysAgo = new Date(today.getTime() - thirtyDaysInMilliseconds);
-
     this.state = {
       title: '',
       description: '',
-      startDate: thirtyDaysAgo,
-      endDate: today
+      startDayBefore: DEFAULT_START_DAY_BEFORE,
+      endDayBefore: DEFAULT_END_DAY_BEFORE
     };
   }
 
@@ -29,12 +25,8 @@ class SearchForm extends React.Component {
     this.changeState({description: event.target.value});
   }
 
-  startDateHandleChange(startDate) {
-    this.changeState({startDate});
-  }
-
-  endDateHandleChange(endDate) {
-    this.changeState({endDate});
+  daysBeforeHandleChange([startDayBefore, endDayBefore]) {
+    this.changeState({startDayBefore, endDayBefore});
   }
 
   changeState(newState) {
@@ -68,27 +60,13 @@ class SearchForm extends React.Component {
               onChange={this.descriptionHandleChange.bind(this)}
             />
           </div>
-          <fieldset>
-            <legend>Vagas publicadas entre</legend>
-            <div className="form-group">
-              <label htmlFor="job-start-date">A partir da data</label>
-              <DatePicker
-                id="job-start-date"
-                className="form-control"
-                selected={this.state.startDate}
-                onChange={this.startDateHandleChange.bind(this)}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="job-end-date">Até a data</label>
-              <DatePicker
-                id="job-end-date"
-                className="form-control"
-                selected={this.state.endDate}
-                onChange={this.endDateHandleChange.bind(this)}
-              />
-            </div>
-          </fieldset>
+          <InputRange
+            id="days-range"
+            label="Intervalo entre os dias"
+            min={DEFAULT_START_DAY_BEFORE}
+            max={DEFAULT_END_DAY_BEFORE}
+            onChange={this.daysBeforeHandleChange.bind(this)}
+          />
         </form>
       </div>
     );

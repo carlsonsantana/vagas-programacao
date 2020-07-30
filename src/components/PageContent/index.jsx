@@ -7,12 +7,12 @@ import {
 } from 'react-router-dom';
 import md5 from 'md5';
 import stripHtmlComments from 'strip-html-comments';
+import calcudate from 'calcudate';
 
 import JobList from '../JobList';
 import JobDetails from '../JobDetails';
 
 const API_URL = 'https://carlsonsantana.github.io/static-jobs-api/data.json';
-const A_DAY_IN_MILLISECONDS = 1000 * 60 * 60 * 24;
 
 class PageContent extends React.Component {
   constructor() {
@@ -46,19 +46,29 @@ class PageContent extends React.Component {
     })).then((jobs) => this.setState({allJobs: jobs, jobs}));
   }
 
+  getDateAgo(days) {
+    const now = new Date();
+    const today = calcudate.getStart(now).day;
+    return calcudate.sub(today).days(days);
+  }
+
   filterHandler(filters) {
     const titleRegex = new RegExp(filters.title, 'gi');
     const descriptionRegex = new RegExp(filters.description, 'gi');
-    const endDate = new Date(filters.endDate.getTime() + A_DAY_IN_MILLISECONDS);
+    const startDate = this.getDateAgo(filters.endDayBefore);
+    const endDate = this.getDateAgo(filters.startDayBefore - 1);
+
     const jobs = this.state.allJobs.filter((job) => {
       const publishedAt = new Date(job.publishedAt);
+
       return (
         titleRegex.test(job.title)
         && descriptionRegex.test(job.description)
-        && (publishedAt.getTime() >= filters.startDate.getTime())
+        && (publishedAt.getTime() >= startDate.getTime())
         && (publishedAt.getTime() < endDate.getTime())
       );
     });
+
     this.setState({jobs});
   }
 
