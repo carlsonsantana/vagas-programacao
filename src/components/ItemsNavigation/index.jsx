@@ -2,6 +2,8 @@ import React from 'react';
 
 import InfiniteScroll from 'react-infinite-scroller';
 
+const ITEMS_PER_PAGE = 10;
+
 class ItemsNavigation extends React.Component {
   constructor() {
     super();
@@ -10,23 +12,31 @@ class ItemsNavigation extends React.Component {
       loadedItems: [],
       hasMoreItems: true
     };
-    this.index = 0;
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.items.length !== this.props.items.length) {
-      this.setState({hasMoreItems: true});
+  componentDidUpdate({items: oldItems}) {
+    const {items: newItems} = this.props;
+    if (oldItems !== newItems) {
+      this.setLoadedItems([]);
     }
   }
 
+  setLoadedItems(loadedItems) {
+    const {items} = this.props;
+    const hasMoreItems = loadedItems.length < items.length;
+    this.setState({loadedItems, hasMoreItems});
+  }
+
   loadItems() {
-    const items = this.props.items;
-    const loadedItems = items.slice(0, this.index * 10);
-    this.index++;
-    this.setState({
-      loadedItems,
-      hasMoreItems: ((this.index * 10) < items.length)
-    });
+    const {items} = this.props;
+    const {loadedItems: oldLoadedItems} = this.state;
+    const newLoadedItemsSize = Math.min(
+      (oldLoadedItems.length + ITEMS_PER_PAGE),
+      items.length
+    );
+    const newLoadedItems = items.slice(0, newLoadedItemsSize);
+
+    this.setLoadedItems(newLoadedItems);
   }
 
   render() {
