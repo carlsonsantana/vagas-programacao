@@ -1,13 +1,12 @@
 import React from 'react';
 
-import { useParams } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown';
+import {useParams} from 'react-router-dom';
 import ReactLoading from 'react-loading';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import remarkBreaks from 'remark-breaks';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faGithub} from '@fortawesome/free-brands-svg-icons';
 
 import TimeAgo from '../TimeAgo';
+import MarkdownContent from '../MarkdownContent';
 import './style.css';
 
 export default function JobDetails({jobs}) {
@@ -56,10 +55,8 @@ export default function JobDetails({jobs}) {
             </li>
           </ul>
         </section>
-        <section>
-          <ReactMarkdown source={job.description} plugins={[remarkBreaks]} />
-        </section>
       </section>
+      <MarkdownContent content={job.description} />
     </article>
   );
 }
