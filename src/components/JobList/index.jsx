@@ -1,6 +1,6 @@
 import React from 'react';
 
-import JobItem from '../JobItem';
+import JobListItem from '../JobListItem';
 import FilterForm from '../FilterForm';
 import ItemsNavigation from '../ItemsNavigation';
 
@@ -10,7 +10,7 @@ export default function JobList({jobs, filterHandler}) {
       <FilterForm filterHandler={filterHandler} />
       <ItemsNavigation
         items={jobs}
-        render={(job) => <JobItem key={job.id} job={job} />}
+        render={(job) => <JobListItem key={job.id} job={job} />}
       />
     </div>
   );
