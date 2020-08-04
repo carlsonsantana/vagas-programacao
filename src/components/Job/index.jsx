@@ -2,11 +2,10 @@ import React from 'react';
 
 import {useParams} from 'react-router-dom';
 import ReactLoading from 'react-loading';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faGithub} from '@fortawesome/free-brands-svg-icons';
 
 import TimeAgo from '../TimeAgo';
 import MarkdownContent from '../MarkdownContent';
+import JobDetails from '../JobDetails';
 import './style.css';
 
 export default function Job({jobs}) {
@@ -32,30 +31,7 @@ export default function Job({jobs}) {
         <h2 className="mb-1">{job.title}</h2>
         <TimeAgo date={job.publishedAt} />
       </header>
-      <section>
-        <section>
-          <ul className="list-group list-group-flush">
-            <li className="list-group-item">
-              Página onde a vaga foi publicada:{' '}
-              <a
-                href={job.url}
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                {job.url}
-              </a>{' '}
-              <a
-                href={job.url}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="text-body"
-              >
-                <FontAwesomeIcon icon={faGithub} />
-              </a>
-            </li>
-          </ul>
-        </section>
-      </section>
+      <JobDetails job={job} />
       <MarkdownContent content={job.description} />
     </article>
   );
