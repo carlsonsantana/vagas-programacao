@@ -9,7 +9,7 @@ import TimeAgo from '../TimeAgo';
 import MarkdownContent from '../MarkdownContent';
 import './style.css';
 
-export default function JobDetails({jobs}) {
+export default function Job({jobs}) {
   const {id} = useParams();
 
   if ((jobs === null) || (jobs.length === 0)) {

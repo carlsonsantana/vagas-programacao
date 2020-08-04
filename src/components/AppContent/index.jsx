@@ -10,7 +10,7 @@ import stripHtmlComments from 'strip-html-comments';
 import calcudate from 'calcudate';
 
 import JobList from '../JobList';
-import JobDetails from '../JobDetails';
+import Job from '../Job';
 
 const API_URL = 'https://carlsonsantana.github.io/static-jobs-api/data.json';
 
@@ -91,7 +91,7 @@ class AppContent extends React.Component {
             <Route
               exact
               path="/job/:id"
-              render={() => <JobDetails jobs={jobs} />}
+              render={() => <Job jobs={jobs} />}
             />
           </Switch>
         </Router>
