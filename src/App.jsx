@@ -1,13 +1,13 @@
 import React from 'react';
 
-import PageHeader from './components/PageHeader';
-import PageContent from './components/PageContent';
+import AppHeader from './components/AppHeader';
+import AppContent from './components/AppContent';
 
 function App() {
   return (
     <div className="container-fluid">
-      <PageHeader />
-      <PageContent />
+      <AppHeader />
+      <AppContent />
     </div>
   );
 }

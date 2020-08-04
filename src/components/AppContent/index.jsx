@@ -14,7 +14,7 @@ import JobDetails from '../JobDetails';
 
 const API_URL = 'https://carlsonsantana.github.io/static-jobs-api/data.json';
 
-class PageContent extends React.Component {
+class AppContent extends React.Component {
   constructor() {
     super();
 
@@ -100,4 +100,4 @@ class PageContent extends React.Component {
   }
 }
 
-export default PageContent;
+export default AppContent;
