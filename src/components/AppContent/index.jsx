@@ -11,6 +11,7 @@ import calcudate from 'calcudate';
 
 import JobList from '../JobList';
 import Job from '../Job';
+import Loading from '../Loading';
 
 const API_URL = 'https://carlsonsantana.github.io/static-jobs-api/data.json';
 
@@ -19,8 +20,9 @@ class AppContent extends React.Component {
     super();
 
     this.state = {
-      jobs: [],
-      allJobs: []
+      filteredJobs: [],
+      allJobs: [],
+      jobsLoaded: false
     };
   }
 
@@ -43,7 +45,13 @@ class AppContent extends React.Component {
     })).then((jobs) => jobs.map((job) => {
       job.description = stripHtmlComments(job.description);
       return job;
-    })).then((jobs) => this.setState({allJobs: jobs, jobs}));
+    })).then(
+      (jobs) => this.setState({
+        allJobs: jobs,
+        filteredJobs: jobs,
+        jobsLoaded: true
+      })
+    );
   }
 
   getDateAgo(days) {
@@ -58,7 +66,7 @@ class AppContent extends React.Component {
     const startDate = this.getDateAgo(filters.endDayBefore);
     const endDate = this.getDateAgo(filters.startDayBefore - 1);
 
-    const jobs = this.state.allJobs.filter((job) => {
+    const filteredJobs = this.state.allJobs.filter((job) => {
       const publishedAt = new Date(job.publishedAt);
 
       return (
@@ -69,11 +77,30 @@ class AppContent extends React.Component {
       );
     });
 
-    this.setState({jobs});
+    this.setState({filteredJobs});
+  }
+
+  getJobById(id) {
+    const {allJobs} = this.state;
+    return allJobs.find((job) => job.id === id);
+  }
+
+  renderJobPage(props) {
+    const {jobsLoaded} = this.state;
+
+    if (!jobsLoaded) {
+      return <Loading />;
+    }
+
+    const jobId = props.match.params.id;
+    const job = this.getJobById(jobId);
+
+    return <Job job={job} />;
   }
 
   render() {
-    const {jobs} = this.state;
+    const {filteredJobs} = this.state;
+
     return (
       <main>
         <Router basename="/vagas-programacao/">
@@ -83,7 +110,7 @@ class AppContent extends React.Component {
               path="/"
               render={() => (
                 <JobList
-                  jobs={jobs}
+                  jobs={filteredJobs}
                   filterHandler={this.filterHandler.bind(this)}
                 />
               )}
@@ -91,7 +118,7 @@ class AppContent extends React.Component {
             <Route
               exact
               path="/job/:id"
-              render={() => <Job jobs={jobs} />}
+              render={this.renderJobPage.bind(this)}
             />
           </Switch>
         </Router>
