@@ -9,7 +9,7 @@ import md5 from 'md5';
 import stripHtmlComments from 'strip-html-comments';
 import calcudate from 'calcudate';
 
-import JobList from '../JobList';
+import HomePage from '../HomePage';
 import Job from '../Job';
 import Loading from '../Loading';
 
@@ -109,7 +109,7 @@ class AppContent extends React.Component {
               exact
               path="/"
               render={() => (
-                <JobList
+                <HomePage
                   jobs={filteredJobs}
                   filterHandler={this.filterHandler.bind(this)}
                 />
