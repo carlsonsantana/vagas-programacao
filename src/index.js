@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import {register as registerLocaleTimeAgo} from 'timeago.js';
 import brazilianPortugueseLocaleTimeAgo from 'timeago.js/lib/lang/pt_BR';
+import {ThroughProvider} from 'react-through';
 
 import App from './App.jsx';
 import * as serviceWorker from './serviceWorker';
@@ -11,9 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <ThroughProvider><App /></ThroughProvider>,
   document.getElementById('root')
 );
 

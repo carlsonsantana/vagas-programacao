@@ -1,14 +1,11 @@
 import React from 'react';
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 import md5 from 'md5';
 import stripHtmlComments from 'strip-html-comments';
 import calcudate from 'calcudate';
 
+import BreadcrumbItem from '../BreadcrumbItem';
 import HomePage from '../HomePage';
 import Job from '../Job';
 import Loading from '../Loading';
@@ -103,25 +100,25 @@ class AppContent extends React.Component {
 
     return (
       <main>
-        <Router basename="/vagas-programacao/">
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={() => (
-                <HomePage
-                  jobs={filteredJobs}
-                  filterHandler={this.filterHandler.bind(this)}
-                />
-              )}
-            />
-            <Route
-              exact
-              path="/job/:id"
-              render={this.renderJobPage.bind(this)}
-            />
-          </Switch>
-        </Router>
+        <BreadcrumbItem to="/">Página inicial</BreadcrumbItem>
+
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <HomePage
+                jobs={filteredJobs}
+                filterHandler={this.filterHandler.bind(this)}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/job/:id"
+            render={this.renderJobPage.bind(this)}
+          />
+        </Switch>
       </main>
     );
   }
