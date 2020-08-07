@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {BreadcrumbsItem} from 'react-breadcrumbs-dynamic';
+import {useDocumentTitle} from '@huse/document-title';
 
 function generateBreadcrumbsItems({path, title, parent}) {
   let parentContent = '';
@@ -19,6 +20,10 @@ function generateBreadcrumbsItems({path, title, parent}) {
 
 export default function PageMetadata({page}) {
   const breadcrumbsitems = generateBreadcrumbsItems(page);
+  const documentTitle = `${page.title} - Vagas Programação`;
+
+  useDocumentTitle(documentTitle);
+
   return (
     <>
       {breadcrumbsitems}
