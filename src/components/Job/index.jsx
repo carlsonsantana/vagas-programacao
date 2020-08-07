@@ -1,17 +1,19 @@
 import React from 'react';
 
-import BreadcrumbItem from '../BreadcrumbItem';
+import PageMetadata from '../PageMetadata';
 import TimeAgo from '../TimeAgo';
 import MarkdownContent from '../MarkdownContent';
 import JobDetails from '../JobDetails';
+import {JOB_PAGE_TEMPLATE} from '../../config/pages';
+import {pageFactoryByTemplate} from '../../utils/page-factory';
 import './style.css';
 
 export default function Job({job}) {
-  const jobURL = `/job/${job.id}`;
+  const pageMetadata = pageFactoryByTemplate(JOB_PAGE_TEMPLATE, job);
 
   return (
     <article className="job-details">
-      <BreadcrumbItem to={jobURL}>{job.title}</BreadcrumbItem>
+      <PageMetadata page={pageMetadata} />
 
       <header className="d-flex w-100 justify-content-between">
         <h2 className="mb-1">{job.title}</h2>

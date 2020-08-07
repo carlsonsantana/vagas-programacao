@@ -1,11 +1,15 @@
 import React from 'react';
 
-import JobList from '../JobList';
+import {HOME_PAGE} from '../../config/pages';
+import PageMetadata from '../PageMetadata';
 import FilterForm from '../FilterForm';
+import JobList from '../JobList';
 
 export default function HomePage({jobs, filterHandler}) {
   return (
     <div>
+      <PageMetadata page={HOME_PAGE} />
+
       <FilterForm filterHandler={filterHandler} />
       <JobList jobs={jobs} />
     </div>

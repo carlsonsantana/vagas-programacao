@@ -5,7 +5,6 @@ import md5 from 'md5';
 import stripHtmlComments from 'strip-html-comments';
 import calcudate from 'calcudate';
 
-import BreadcrumbItem from '../BreadcrumbItem';
 import HomePage from '../HomePage';
 import Job from '../Job';
 import Loading from '../Loading';
@@ -100,8 +99,6 @@ class AppContent extends React.Component {
 
     return (
       <main>
-        <BreadcrumbItem to="/">Página inicial</BreadcrumbItem>
-
         <Switch>
           <Route
             exact
