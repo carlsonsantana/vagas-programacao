@@ -2,9 +2,9 @@ import React from 'react';
 
 import {BrowserRouter as Router} from 'react-router-dom';
 
-import AppHeader from './components/AppHeader';
-import AppContent from './components/AppContent';
-import AppBreadcrumbs from './components/AppBreadcrumbs';
+import AppHeader from './components/layout/AppHeader';
+import AppContent from './components/layout/AppContent';
+import AppBreadcrumbs from './components/layout/AppBreadcrumbs';
 
 function App() {
   return (

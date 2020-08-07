@@ -1,8 +1,8 @@
 import React from 'react';
 
-import TimeAgo from '../TimeAgo';
-import MarkdownContent from '../MarkdownContent';
-import JobDetails from '../JobDetails';
+import TimeAgo from '../../../utils/TimeAgo';
+import MarkdownContent from '../../../utils/MarkdownContent';
+import JobDetails from './JobDetails';
 import './style.css';
 
 export default function Job({job}) {

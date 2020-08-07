@@ -1,7 +1,7 @@
 import React from 'react';
 
-import JobListItem from '../JobListItem';
-import ItemsNavigation from '../ItemsNavigation';
+import JobListItem from './JobListItem';
+import ItemsNavigation from '../../../utils/ItemsNavigation';
 
 export default function JobList({jobs}) {
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import InputText from '../InputText';
-import InputRange from '../InputRange';
+import InputText from '../../../utils/InputText';
+import InputRange from '../../../utils/InputRange';
 
 const DEFAULT_START_DAY_BEFORE = 0;
 const DEFAULT_END_DAY_BEFORE = 30;

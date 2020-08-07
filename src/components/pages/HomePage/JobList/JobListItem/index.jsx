@@ -5,7 +5,7 @@ import trimCharacters from 'trim-characters';
 import removeMarkdown from 'remove-markdown';
 
 import './style.css';
-import TimeAgo from '../TimeAgo';
+import TimeAgo from '../../../../utils/TimeAgo';
 
 export default function JobListItem({job}) {
   const jobURL = `/job/${job.id}`;
