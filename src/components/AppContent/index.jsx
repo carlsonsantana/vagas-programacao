@@ -6,7 +6,7 @@ import stripHtmlComments from 'strip-html-comments';
 import calcudate from 'calcudate';
 
 import HomePage from '../HomePage';
-import Job from '../Job';
+import JobPage from '../JobPage';
 import Loading from '../Loading';
 
 const API_URL = 'https://carlsonsantana.github.io/static-jobs-api/data.json';
@@ -91,7 +91,7 @@ class AppContent extends React.Component {
     const jobId = props.match.params.id;
     const job = this.getJobById(jobId);
 
-    return <Job job={job} />;
+    return <JobPage job={job} />;
   }
 
   render() {
