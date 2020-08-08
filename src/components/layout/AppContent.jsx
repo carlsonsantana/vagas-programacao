@@ -5,9 +5,9 @@ import md5 from 'md5';
 import stripHtmlComments from 'strip-html-comments';
 import calcudate from 'calcudate';
 
-import HomePage from '../../pages/HomePage';
-import JobPage from '../../pages/JobPage';
-import Loading from '../../utils/Loading';
+import HomePage from '../pages/HomePage';
+import JobPage from '../pages/JobPage';
+import Loading from '../utils/Loading';
 
 const API_URL = 'https://carlsonsantana.github.io/static-jobs-api/data.json';
 
