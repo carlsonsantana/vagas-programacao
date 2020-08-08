@@ -12,6 +12,8 @@ class ItemsNavigation extends React.Component {
       loadedItems: [],
       hasMoreItems: true
     };
+
+    this.loadItems = this.loadItems.bind(this);
   }
 
   componentDidUpdate({items: oldItems}) {
@@ -45,7 +47,7 @@ class ItemsNavigation extends React.Component {
       <InfiniteScroll
         element="ul"
         className="list-group"
-        loadMore={this.loadItems.bind(this)}
+        loadMore={this.loadItems}
         hasMore={hasMoreItems}
       >
         {loadedItems.map(this.props.render)}

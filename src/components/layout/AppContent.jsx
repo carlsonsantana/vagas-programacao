@@ -20,6 +20,9 @@ class AppContent extends React.Component {
       allJobs: [],
       jobsLoaded: false
     };
+
+    this.filterHandler = this.filterHandler.bind(this);
+    this.renderJobPage = this.renderJobPage.bind(this);
   }
 
   componentDidMount() {
@@ -106,15 +109,11 @@ class AppContent extends React.Component {
             render={() => (
               <HomePage
                 jobs={filteredJobs}
-                filterHandler={this.filterHandler.bind(this)}
+                filterHandler={this.filterHandler}
               />
             )}
           />
-          <Route
-            exact
-            path="/job/:id"
-            render={this.renderJobPage.bind(this)}
-          />
+          <Route exact path="/job/:id" render={this.renderJobPage} />
         </Switch>
       </main>
     );

@@ -1,6 +1,12 @@
 import React from 'react';
 
 class InputText extends React.Component {
+  constructor() {
+    super();
+
+    this.onChange = this.onChange.bind(this);
+  }
+
   onChange(event) {
     this.props.onChange(event.target.value);
   }
@@ -14,7 +20,7 @@ class InputText extends React.Component {
           type="text"
           className="form-control"
           id={id}
-          onChange={this.onChange.bind(this)}
+          onChange={this.onChange}
         />
       </div>
     );

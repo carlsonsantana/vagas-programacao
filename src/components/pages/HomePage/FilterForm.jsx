@@ -16,6 +16,11 @@ class FilterForm extends React.Component {
       startDayBefore: DEFAULT_START_DAY_BEFORE,
       endDayBefore: DEFAULT_END_DAY_BEFORE
     };
+
+    this.filterJobs = this.filterJobs.bind(this);
+    this.titleHandleChange = this.titleHandleChange.bind(this);
+    this.descriptionHandleChange = this.descriptionHandleChange.bind(this);
+    this.daysBeforeHandleChange = this.daysBeforeHandleChange.bind(this);
   }
 
   titleHandleChange(title) {
@@ -31,7 +36,7 @@ class FilterForm extends React.Component {
   }
 
   changeState(newState) {
-    this.setState(newState, this.filterJobs.bind(this));
+    this.setState(newState, this.filterJobs);
   }
 
   filterJobs() {
@@ -46,19 +51,19 @@ class FilterForm extends React.Component {
           <InputText
             id="job-title"
             label="Título"
-            onChange={this.titleHandleChange.bind(this)}
+            onChange={this.titleHandleChange}
           />
           <InputText
             id="job-description"
             label="Descrição"
-            onChange={this.descriptionHandleChange.bind(this)}
+            onChange={this.descriptionHandleChange}
           />
           <InputRange
             id="days-range"
             label="Intervalo entre os dias"
             min={DEFAULT_START_DAY_BEFORE}
             max={DEFAULT_END_DAY_BEFORE}
-            onChange={this.daysBeforeHandleChange.bind(this)}
+            onChange={this.daysBeforeHandleChange}
           />
         </form>
       </div>
