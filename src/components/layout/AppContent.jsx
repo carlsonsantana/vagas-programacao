@@ -1,15 +1,12 @@
 import React from 'react';
 
 import {Switch, Route} from 'react-router-dom';
-import md5 from 'md5';
-import stripHtmlComments from 'strip-html-comments';
 import calcudate from 'calcudate';
 
 import HomePage from '../pages/HomePage';
 import JobPage from '../pages/JobPage';
 import Loading from '../utils/Loading';
-
-const API_URL = 'https://carlsonsantana.github.io/static-jobs-api/data.json';
+import {loadJobs} from '../../services/job-service';
 
 class AppContent extends React.Component {
   constructor() {
@@ -26,31 +23,11 @@ class AppContent extends React.Component {
   }
 
   componentDidMount() {
-    fetch(
-      API_URL,
-      {
-        cache: 'no-store',
-        method: 'GET'
-      }
-    ).then((response) => {
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
-
-      return response.json();
-    }).then((jobs) => jobs.map((job) => {
-      job.id = md5(`${job.url}:${job.publishedAt}`);
-      return job;
-    })).then((jobs) => jobs.map((job) => {
-      job.description = stripHtmlComments(job.description);
-      return job;
-    })).then(
-      (jobs) => this.setState({
-        allJobs: jobs,
-        filteredJobs: jobs,
-        jobsLoaded: true
-      })
-    );
+    loadJobs().then((jobs) => this.setState({
+      allJobs: jobs,
+      filteredJobs: jobs,
+      jobsLoaded: true
+    }));
   }
 
   getDateAgo(days) {
