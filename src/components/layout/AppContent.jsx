@@ -1,5 +1,6 @@
 import React from 'react';
 
+import {connect} from 'react-redux';
 import {Switch, Route} from 'react-router-dom';
 import calcudate from 'calcudate';
 
@@ -30,6 +31,15 @@ class AppContent extends React.Component {
     }));
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      (prevProps.filters !== this.props.filters)
+      || (prevState.allJobs !== this.state.allJobs)
+    ) {
+      this.filterHandler(this.props.filters);
+    }
+  }
+
   getDateAgo(days) {
     const now = new Date();
     const today = calcudate.getStart(now).day;
@@ -37,12 +47,14 @@ class AppContent extends React.Component {
   }
 
   filterHandler(filters) {
+    const {allJobs} = this.state;
+
     const titleRegex = new RegExp(filters.title, 'gi');
     const descriptionRegex = new RegExp(filters.description, 'gi');
     const startDate = this.getDateAgo(filters.endDayBefore);
     const endDate = this.getDateAgo(filters.startDayBefore - 1);
 
-    const filteredJobs = this.state.allJobs.filter((job) => {
+    const filteredJobs = allJobs.filter((job) => {
       const publishedAt = new Date(job.publishedAt);
 
       return (
@@ -83,12 +95,7 @@ class AppContent extends React.Component {
           <Route
             exact
             path="/"
-            render={() => (
-              <HomePage
-                jobs={filteredJobs}
-                filterHandler={this.filterHandler}
-              />
-            )}
+            render={() => <HomePage jobs={filteredJobs} />}
           />
           <Route exact path="/job/:id" render={this.renderJobPage} />
         </Switch>
@@ -97,4 +104,8 @@ class AppContent extends React.Component {
   }
 }
 
-export default AppContent;
+function mapStateToProps(state) {
+  return {filters: state.filters.filters};
+}
+
+export default connect(mapStateToProps)(AppContent);

@@ -4,7 +4,9 @@ import ReactDOM from 'react-dom';
 import {register as registerLocaleTimeAgo} from 'timeago.js';
 import brazilianPortugueseLocaleTimeAgo from 'timeago.js/lib/lang/pt_BR';
 import {ThroughProvider} from 'react-through';
+import {Provider} from 'react-redux';
 
+import store from './store';
 import App from './App.jsx';
 import * as serviceWorker from './serviceWorker';
 
@@ -12,7 +14,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 
 ReactDOM.render(
-  <ThroughProvider><App /></ThroughProvider>,
+  (
+    <Provider store={store}>
+      <ThroughProvider>
+        <App />
+      </ThroughProvider>
+    </Provider>
+  ),
   document.getElementById('root')
 );
 

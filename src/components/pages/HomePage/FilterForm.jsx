@@ -1,23 +1,19 @@
 import React from 'react';
 
+import {connect} from 'react-redux';
+
 import InputText from '../../utils/InputText';
 import InputRange from '../../utils/InputRange';
-
-const DEFAULT_START_DAY_BEFORE = 0;
-const DEFAULT_END_DAY_BEFORE = 30;
+import {setFilters} from '../../../store/actions/filters';
+import {
+  DEFAULT_START_DAY_BEFORE,
+  DEFAULT_END_DAY_BEFORE
+} from '../../../config/filters';
 
 class FilterForm extends React.Component {
   constructor() {
     super();
 
-    this.state = {
-      title: '',
-      description: '',
-      startDayBefore: DEFAULT_START_DAY_BEFORE,
-      endDayBefore: DEFAULT_END_DAY_BEFORE
-    };
-
-    this.filterJobs = this.filterJobs.bind(this);
     this.titleHandleChange = this.titleHandleChange.bind(this);
     this.descriptionHandleChange = this.descriptionHandleChange.bind(this);
     this.daysBeforeHandleChange = this.daysBeforeHandleChange.bind(this);
@@ -36,11 +32,10 @@ class FilterForm extends React.Component {
   }
 
   changeState(newState) {
-    this.setState(newState, this.filterJobs);
-  }
-
-  filterJobs() {
-    this.props.filterHandler(this.state);
+    this.props.setFilters({
+      ...this.props.filters,
+      ...newState
+    });
   }
 
   render() {
@@ -71,4 +66,12 @@ class FilterForm extends React.Component {
   }
 }
 
-export default FilterForm;
+function mapStateToProps(state) {
+  return {filters: state.filters.filters};
+}
+
+function mapDispatchToProps(dispatch) {
+  return {setFilters: filters => dispatch(setFilters(filters))};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilterForm);
