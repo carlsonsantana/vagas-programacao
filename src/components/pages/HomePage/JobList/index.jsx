@@ -1,9 +1,11 @@
 import React from 'react';
 
+import {connect} from 'react-redux';
+
 import JobListItem from './JobListItem';
 import ItemsNavigation from '../../../utils/ItemsNavigation';
 
-export default function JobList({jobs}) {
+function JobList({jobs}) {
   return (
     <ItemsNavigation
       items={jobs}
@@ -11,3 +13,9 @@ export default function JobList({jobs}) {
     />
   );
 }
+
+function mapStateToProps(state) {
+  return {jobs: state.jobs.jobs};
+}
+
+export default connect(mapStateToProps)(JobList);

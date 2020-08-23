@@ -8,13 +8,13 @@ import HomePage from '../pages/HomePage';
 import JobPage from '../pages/JobPage';
 import Loading from '../utils/Loading';
 import {loadJobs} from '../../services/job-service';
+import {setJobs} from '../../store/actions/jobs';
 
 class AppContent extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      filteredJobs: [],
       allJobs: [],
       jobsLoaded: false
     };
@@ -24,11 +24,14 @@ class AppContent extends React.Component {
   }
 
   componentDidMount() {
-    loadJobs().then((jobs) => this.setState({
-      allJobs: jobs,
-      filteredJobs: jobs,
-      jobsLoaded: true
-    }));
+    loadJobs().then((jobs) => {
+      this.setState({
+        allJobs: jobs,
+        jobsLoaded: true
+      });
+
+      this.props.setJobs(jobs);
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -65,7 +68,7 @@ class AppContent extends React.Component {
       );
     });
 
-    this.setState({filteredJobs});
+    this.props.setJobs(filteredJobs);
   }
 
   getJobById(id) {
@@ -87,16 +90,10 @@ class AppContent extends React.Component {
   }
 
   render() {
-    const {filteredJobs} = this.state;
-
     return (
       <main>
         <Switch>
-          <Route
-            exact
-            path="/"
-            render={() => <HomePage jobs={filteredJobs} />}
-          />
+          <Route exact path="/" render={() => <HomePage />} />
           <Route exact path="/job/:id" render={this.renderJobPage} />
         </Switch>
       </main>
@@ -108,4 +105,8 @@ function mapStateToProps(state) {
   return {filters: state.filters.filters};
 }
 
-export default connect(mapStateToProps)(AppContent);
+function mapDispatchToProps(dispatch) {
+  return {setJobs: jobs => dispatch(setJobs(jobs))};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppContent);

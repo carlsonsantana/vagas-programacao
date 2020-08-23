@@ -5,13 +5,13 @@ import PageMetadata from '../../utils/PageMetadata';
 import FilterForm from './FilterForm';
 import JobList from './JobList';
 
-export default function HomePage({jobs}) {
+export default function HomePage() {
   return (
     <div>
       <PageMetadata page={HOME_PAGE} />
 
       <FilterForm />
-      <JobList jobs={jobs} />
+      <JobList />
     </div>
   );
 }
