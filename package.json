@@ -34,7 +34,6 @@
     "redux": "^4.0.5",
     "remark-breaks": "^1.0.5",
     "remove-markdown": "^0.3.0",
-    "strip-html-comments": "^1.0.0",
     "timeago-react": "^3.0.0",
     "timeago.js": "^4.0.2",
     "trim-characters": "^1.4.0"

@@ -1,9 +1,7 @@
-import stripHtmlComments from 'strip-html-comments';
-
 const API_URL = 'https://carlsonsantana.github.io/static-jobs-api/data.json';
 
 export function loadJobs() {
-  return requestJobs().then(convertResponseToJSON).then(removeMarkdownComments);
+  return requestJobs().then(convertResponseToJSON);
 }
 
 function requestJobs() {
@@ -22,11 +20,4 @@ function checkRequestError(response) {
 
 function convertResponseToJSON(response) {
   return response.json();
-}
-
-function removeMarkdownComments(jobs) {
-  return jobs.map((job) => {
-    job.description = stripHtmlComments(job.description);
-    return job;
-  });
 }
